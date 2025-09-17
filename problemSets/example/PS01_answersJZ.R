@@ -45,7 +45,7 @@ n <- length(y)
 #####################
 # Problem 2
 #####################
-
+head(mtcars)
 # read in expenditure data
 expenditure <- read.table("https://raw.githubusercontent.com/ASDS-TCD/StatsI_2025/main/datasets/expenditure.txt", header=T)
 
