@@ -34,6 +34,15 @@ lapply(c(),  pkgTest)
 #####################
 
 y <- c(105, 69, 86, 100, 82, 111, 104, 110, 87, 108, 87, 90, 94, 113, 112, 98, 80, 97, 95, 111, 114, 89, 95, 126, 98)
+#90 conf intervals
+t.test(y, conf.level = 0.90)
+
+#Answer 1.1: we are 90% confident that (in the long run) the sample mean falls between 93.96 and 102.92
+
+#comparing to population with mu = 100; one-tailed
+t.test(y, mu = 100, alternative = "greater")
+
+#Answer 1.2: The sample mean student IQ is not significantly higher than the population mean IQ, p = 0.7215
 
 #####################
 # Problem 2
