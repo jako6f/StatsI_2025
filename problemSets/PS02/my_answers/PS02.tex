@@ -97,31 +97,50 @@
 	
 	\item [(a)]
 	Calculate the $\chi^2$ test statistic by hand/manually (even better if you can do "by hand" in \texttt{R}).\\
-	\vspace{7cm}
+	
+	 \textbf{Answer:} The chi-square test statistic is:
+	\[
+	\chi^2 = 3.791, \quad df = 2
+	\]
+	Computed in \texttt{R} as:
+	\lstinputlisting[language=R, firstline=37, lastline=67]{PS02_JL.R}
 	
 	\item [(b)]
 	Now calculate the p-value from the test statistic you just created (in \texttt{R}).\footnote{Remember frequency should be $>$ 5 for all cells, but let's calculate the p-value here anyway.}  What do you conclude if $\alpha = 0.1$?\\
 	
+	\textbf{Answer:} The p-value obtained was $p = 0.150$, which is greater than $\alpha = 0.1$. 
+	We therefore \textit{fail to reject} the null hypothesis and conclude that there is no statistically significant association between social class and outcome of the stop.\\
+	
+	Computed in \texttt{R} as:
+	\lstinputlisting[language=R, firstline=71, lastline=78]{PS02_JL.R}
+	
 	\newpage
 	\item [(c)] Calculate the standardized residuals for each cell and put them in the table below.
 	\vspace{1cm}
+
+
+\begin{table}[h]
+	\centering
+	\begin{tabular}{l | c c c }
+		& Not Stopped & Bribe requested & Stopped/given warning \\
+		\\[-1.8ex] 
+		\hline \\[-1.8ex]
+		Upper class  & 0.136 & -0.815 & 0.819 \\
+		\\
+		Lower class  & -0.183 & 1.094 & -1.099 \\
+	\end{tabular}
+\end{table}
+	\vspace{1em}
+	Computed in \texttt{R} as:
+	\lstinputlisting[language=R, firstline=81, lastline=83]{PS02_JL.R}
+	\vspace{2cm}
 	
-	\begin{table}[h]
-		\centering
-		\begin{tabular}{l | c c c }
-			& Not Stopped & Bribe requested & Stopped/given warning \\
-			\\[-1.8ex] 
-			\hline \\[-1.8ex]
-			Upper class  &  &  &  \\
-			\\
-			Lower class &  &   &   \\
-			
-		\end{tabular}
-	\end{table}
-	
-	
-	\vspace{7cm}
 	\item [(d)] How might the standardized residuals help you interpret the results?  
+	
+	\textbf{Answer:} 
+	If the Chi-square test were significant (which it was not in this case), we would know that the variables are related, but not which specific categories drive that relationship. The standardised residuals address this by showing how much each observed count deviates from its expected count, measured in units of standard deviation. 
+	
+	Values close to zero indicate that the observed count is very similar to what would be expected under the null hypothesis of independence, whereas residuals greater than $\lvert 2 \rvert$ are typically considered large enough to indicate a significant deviation. In our case, none of the standardised residuals exceed $\lvert 2 \rvert$, which confirms the earlier finding that the Chi-square test was not statistically significant at $\alpha = 0.10$.
 	
 \end{enumerate}
 \newpage
@@ -131,23 +150,73 @@ Chattopadhyay and Duflo were interested in whether women promote different polic
 
 \noindent Each observation in the data set represents a village and there are two villages associated with one GP (i.e. a level of government is called "GP"). Figure~\ref{fig:women_desc} below shows the names and descriptions of the variables in the dataset. The authors hypothesize that female politicians are more likely to support policies female voters want. Researchers found that more women complain about the quality of drinking water than men. You need to estimate the effect of the reservation policy on the number of new or repaired drinking water facilities in the villages.
 \vspace{.5cm}
-\begin{figure}[h!]
-	\caption{\footnotesize{Names and description of variables from Chattopadhyay and Duflo (2004).}}
-	\vspace{.5cm}
-	\centering
-	\label{fig:women_desc}
-	\includegraphics[width=1.1\textwidth]{../../../../graphics/women_desc.png}
-\end{figure}		
+%\begin{figure}[h!] %graphic missing%
+	%\caption{\footnotesize{Names and description of variables from Chattopadhyay and Duflo (2004).}}
+	%\vspace{.5cm}
+	%\centering
+	%\label{fig:women_desc}
+	%\includegraphics[width=1.1\textwidth]{../../../../graphics/women_desc.png}  
+%\end{figure}		
 
 \newpage
 \begin{enumerate}
 	\item [(a)] State a null and alternative (two-tailed) hypothesis. 
 	
-	\vspace{6cm}
+	\textbf{Answer:} 
+	The null hypothesis assumes that there is \textit{no difference} between villages with reserved seats for women and those without. 
+	The alternative hypothesis assumes that the reservation policy \textit{does have an effect}, meaning there is a difference, 
+	but it does not specify the direction of that difference.
+
+	\[
+	H_0: \ \mu_{\text{reserved}} = \mu_{\text{not reserved}}
+	\quad \text{vs.} \quad
+	H_a: \ \mu_{\text{reserved}} \neq \mu_{\text{not reserved}}
+	\]
+		
 	\item [(b)] Run a bivariate regression to test this hypothesis in \texttt{R} (include your code!).
 	
-	\vspace{6cm}
+	\textbf{Answer:} 
+	A bivariate regression was estimated to test whether villages with reserved seats for women differ from those without in the outcome variable.
+	
+	% Table created by stargazer v.5.2.3 by Marek Hlavac, Social Policy Institute. E-mail: marek.hlavac at gmail.com
+	% Date and time: Tue, Oct 14, 2025 - 09:45:08
+	\begin{table}[!htbp] \centering 
+		\begin{tabular}{@{\extracolsep{5pt}}lc} 
+			\\[-1.8ex]\hline 
+			\hline \\[-1.8ex] 
+			& \multicolumn{1}{c}{\textit{Dependent variable:}} \\ 
+			\cline{2-2} 
+			\\[-1.8ex] & Outcome \\ 
+			\hline \\[-1.8ex] 
+			Reserved (1 = Yes) & 9.252$^{**}$ \\ 
+			& (3.948) \\ 
+			Constant & 14.738$^{***}$ \\ 
+			& (2.286) \\ 
+			\hline \\[-1.8ex] 
+			Observations & 322 \\ 
+			R$^{2}$ & 0.017 \\ 
+			Adjusted R$^{2}$ & 0.014 \\ 
+			Residual Std. Error & 33.446 (df = 320) \\ 
+			F Statistic & 5.493$^{**}$ (df = 1; 320) \\ 
+			\hline 
+			\hline \\[-1.8ex] 
+			\textit{Note:}  & \multicolumn{1}{r}{$^{*}$p$<$0.1; $^{**}$p$<$0.05; $^{***}$p$<$0.01} \\ 
+		\end{tabular} 
+	\end{table} 
+	\vspace{1em}
+	Computed in \texttt{R} as:
+	\lstinputlisting[language=R, firstline=100, lastline=122]{PS02_JL.R}
+	
+	\vspace{1cm}
 	\item [(c)] Interpret the coefficient estimate for reservation policy. 
+	
+	\textbf{Answer:} 
+	The estimated intercept, $\hat{\beta}_0 = 14.74$, represents the average number of new or repaired water facilities in villages where the seat was \textit{not} reserved for women. The coefficient for the reservation policy, $\hat{\beta}_1 = 9.252$, captures the estimated causal effect of the policy. It indicates that villages with a reserved seat had, on average, about 9.25 more new or repaired water facilities than those without a reserved seat. 
+	
+	The p-value associated with $\hat{\beta}_1$ is $p = 0.0197$, which is below $\alpha = 0.05$. We therefore \textit{reject the null hypothesis} that the reservation policy had no effect. The policy is associated with a statistically significant increase in the number of water facilities. 
+	
+	However, the $R^2$ value of $0.0169$ suggests that the reservation policy explains only about 1.7\% of the total variance in the outcome. While statistically significant, the effect size is small relative to the overall variation in the data.
+	
 \end{enumerate}
 
 %\newpage

@@ -40,7 +40,7 @@ lapply(c(),  pkgTest)
 
 counts <- c(14, 6, 7, 7, 7, 1)   
 
-#naming row and column
+#naming rows and columns
 row_labels <- c("Upper class", "Lower class")
 col_labels <- c("Not Stopped", "Bribe requested", "Stopped/given warning")
 
@@ -53,8 +53,9 @@ row_totals <- table_with_margins[, "Sum"][1:2]
 col_totals <- table_with_margins["Sum", ][1:3]
 grand_total <- table_with_margins["Sum", "Sum"]
 
-expected_values <- matrix(NA, nrow = 2, ncol = 3, dimnames = dimnames(contingency_table))
 #looping through calculating expected value for each cell
+expected_values <- matrix(NA, nrow = 2, ncol = 3, dimnames = dimnames(contingency_table))
+
 for (i in 1:nrow(expected_values)) {
   for (j in 1:ncol(expected_values)) {
     expected_values[i, j] <- (row_totals[i] * col_totals[j]) / grand_total
@@ -82,7 +83,7 @@ standardised_residuals <- (contingency_table - expected_values) / sqrt(expected_
 standardised_residuals
 
 ##Question 1d: interpreting standardised residuals
-#If the Chi-square test is significant (which it was not), we know that the variables are related, but we don't know which specific categories are driving that relationship.
+#If the Chi-square test is significant (which it wasn't), we know that the variables are related, but we don't know which specific categories are driving that relationship.
 #The standardised residuals tell us how much the observed counts deviate from the expected counts, in units of standard deviation.
 #Values close to 0 mean the observed count is very close to what would be expected under the null hypothesis (statistical independence).
 #Values greater than abs(2) are considered large enough to indicate a significant deviation.
@@ -108,6 +109,17 @@ plot(west_bengal_data$reserved~west_bengal_data$water,main='Women in power and p
 #build model
 model <- lm(water ~ reserved, data = west_bengal_data)
 summary(model)
+
+# producing LaTeX code
+install.packages("stargazer")
+library(stargazer)
+
+stargazer(model, type = "latex",
+          title = "Bivariate Regression of Outcome on Reservation Policy",
+          dep.var.labels = "Outcome",
+          covariate.labels = c("Reserved (1 = Yes)"),
+          digits = 3,
+          no.space = TRUE)
 
 ##Question 2c: interpret model
 
