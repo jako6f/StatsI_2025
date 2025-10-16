@@ -79,9 +79,9 @@ is_significant <- alpha > p_value
 is_significant
 
 ##Question 1c: computing standardised residuals
-standardised_residuals <- (contingency_table - expected_values) / sqrt(expected_values)
-standardised_residuals
-
+chi_test <- chisq.test(contingency_table)
+residuals <- chi_test$residuals
+residuals
 ##Question 1d: interpreting standardised residuals
 #If the Chi-square test is significant (which it wasn't), we know that the variables are related, but we don't know which specific categories are driving that relationship.
 #The standardised residuals tell us how much the observed counts deviate from the expected counts, in units of standard deviation.
