@@ -361,7 +361,7 @@
 		
 		\item Write the prediction equation.
 		
-		\textbf{Answer:}  The prediction equation indicates that, after controlling for spending differences, a one-unit increase in the residual presidential vote share is associated with a 0.257 unit increase in the residual incumbent vote share. The intercept is effectively zero, suggesting no systematic bias when both predictors are centered around their model expectations. The prediction equation reads as follows.
+		\textbf{Answer:}  The prediction equation indicates that, after controlling for spending differences, a one-unit increase in the residual presidential vote share is associated with a 0.257 unit increase in the residual incumbent vote share. The intercept is necessarily zero because both variables are residuals from prior regressions. By construction, residuals are mean-centered and capture only the variation unexplained by the original models; as a result, their average value---and thus the intercept---is zero. The prediction equation reads as follows.
 		\[
 		\widehat{\texttt{resid}_{\texttt{voteshare}}} = -0.000 + 0.257 \cdot \texttt{resid}_{\texttt{presvote}}
 		\]
