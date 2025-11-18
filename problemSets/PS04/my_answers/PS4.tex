@@ -224,16 +224,38 @@ a precinct that was adjacent to a precinct in the treatment group (since people 
 \begin{enumerate}
 	\item [(a)] Use the results from a linear regression to determine whether having these yard signs in a precinct affects vote share (e.g., conduct a hypothesis test with $\alpha = .05$).
 	
-	\newpage		
-	\item [(b)]  Use the results to determine whether being
-	next to precincts with these yard signs affects vote
-	share (e.g., conduct a hypothesis test with $\alpha = .05$).
+	\textbf{Answer:}  
+	We test whether the coefficient for \texttt{assigned} (precincts with yard signs) differs significantly from zero. The estimated coefficient is $0.042$ with a standard error of $0.016$. The test statistic is:
+	\[
+	t = \frac{0.042}{0.016} = 2.625
+	\]
+	Since $|t| > 1.96$, we reject the null hypothesis at the $\alpha = 0.05$ level. We conclude that having yard signs in a precinct has a statistically significant positive effect on Cuccinelli’s vote share. The 95\% confidence interval is:
+	\[
+	0.042 \pm 1.96 \times 0.016 \Rightarrow [0.011,\; 0.073]
+	\]
+	\newpage
 	
-	\vspace{7cm}
+	\item [(b)]  Use the results to determine whether being next to precincts with these yard signs affects vote share (e.g., conduct a hypothesis test with $\alpha = .05$).
+	
+	\textbf{Answer:}  
+	We test whether the coefficient for \texttt{adjacent} (precincts next to those with yard signs) differs significantly from zero. The estimated coefficient is $0.042$ with a standard error of $0.013$. The test statistic is:
+	\[
+	t = \frac{0.042}{0.013} \approx 3.231
+	\]
+	Since $|t| > 1.96$, we reject the null hypothesis at the $\alpha = 0.05$ level. We conclude that being adjacent to a precinct with yard signs also has a statistically significant positive effect on Cuccinelli’s vote share. The 95\% confidence interval is:
+	\[
+	0.042 \pm 1.96 \times 0.013 \Rightarrow [0.017,\; 0.067]
+	\]
+	
 	\item [(c)] Interpret the coefficient for the constant term substantively.
-	\vspace{7cm}
+	
+	\textbf{Answer:}  
+	The constant term is estimated at $0.302$ with a standard error of $0.011$. This represents the expected vote share for Cuccinelli in precincts that had no yard signs and were not adjacent to any precincts with signs. Substantively, it suggests that in the absence of any sign exposure, Cuccinelli’s baseline vote share was approximately 30.2\%.
 	
 	\item [(d)] Evaluate the model fit for this regression.  What does this	tell us about the importance of yard signs versus other factors that are not modeled?
+	
+	\textbf{Answer:}  
+	The model has an $R^2$ of $0.094$, indicating that the two predictors (\texttt{assigned} and \texttt{adjacent}) explain 9.4\% of the variation in Cuccinelli’s vote share across precincts. While the effects of yard signs and adjacency are statistically significant and nontrivial in magnitude (about 4.2 percentage points each), the relatively low $R^2$ suggests that most of the variation in vote share is driven by other factors not included in the model such as demographics, partisanship, turnout, or campaign outreach, conceivably. Yard signs matter, but they account for only a small portion of the overall variation in voting behaviour.
 	
 \end{enumerate}  
 

@@ -25,7 +25,37 @@ pkgTest <- function(pkg){
 
 # here is where you load any necessary packages
 # ex: stringr
-lapply(c("car"),  pkgTest)
+lapply(c("car", "stargazer"),  pkgTest)
 
 # set wd for current folder
 setwd(dirname(rstudioapi::getActiveDocumentContext()$path))
+
+##Question 1
+
+#preliminaries
+data(Prestige)
+help(Prestige)
+
+total_cells <- nrow(Prestige) * ncol(Prestige)
+total_nas <- sum(is.na(Prestige))
+proportion_na <- total_nas / total_cells
+percentage_na <- proportion_na * 100
+percentage_na 
+# proportion of NAs < 2% -> we can safely omit missing cases relying on R's default listwise deletion when running a regression
+
+# Q1a) create dummy variable
+Prestige$professional <- ifelse(Prestige$type == "prof", 1, 0)
+
+# Q1b) run the linear model with interaction
+model1 <- lm(prestige ~ income * professional, data = Prestige)
+summary(model1)
+  
+  #latex documentation
+  stargazer(model1, type = "latex",
+            title = "Regression of Prestige on Income, Professional, and Interaction",
+            style = "default",
+            digits = 3,
+            header = FALSE)
+
+
+
