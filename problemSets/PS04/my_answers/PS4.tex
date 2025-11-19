@@ -101,6 +101,7 @@ help(Prestige)
 	
 	\textbf{Answer:}
 	We want \texttt{professional} = 1 if type == 'prof', and 0 otherwise.
+	
 	\vspace{1em}
 	Computed in \texttt{R} as:
 	\lstinputlisting[language=R, firstline=46, lastline=47]{PS04_JL.R} 
@@ -177,7 +178,7 @@ help(Prestige)
 	\textbf{Answer:} 
 	For professional occupations, the marginal effect ($\text{ME}$) of income is obtained by taking the partial derivative of the prediction equation with respect to \texttt{income}. This derivative simplifies to the sum of the \texttt{income} coefficient and the interaction coefficient. In numerical terms, $0.003 + (-0.002) = 0.001$. Therefore, a \$1{,}000 increase in income raises the prestige score by $0.001 \times 1000 = 1$ point for professionals. Put differently, while income generally has a positive effect on \texttt{prestige}, this effect is reduced by 0.002 for individuals in professional occupations.
 	\[
-	\text{ME}_{\texttt{income}} = \frac{\partial \widehat{\texttt{prestige}}}{\partial \texttt{income}} = \mathbf{0.003} - \mathbf{0.002} \cdot \texttt{professional}
+	\text{ME}_{\texttt{income}} = \frac{\partial \widehat{\texttt{prestige}}}{\partial \texttt{income}} = 0.003 - 0.002 \cdot \texttt{professional}
 	\]
 	\newpage
 	
